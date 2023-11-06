@@ -21,6 +21,7 @@
     "react-icons": "^4.11.0",
     "react-router-dom": "^6.18.0",
     "rsuite": "^5.43.0",
+    "sass": "^1.69.5",
     "vite-aliases": "^0.11.3"
   },
   "devDependencies": {
@@ -33,5 +34,4 @@
     "eslint-plugin-react-refresh": "^0.4.3",
     "vite": "^4.4.5"
   }
-
 }

@@ -8,6 +8,14 @@
   align-items: $align-items;
 }
 
+@mixin flex-gap($direction: row, $col :null,$row :null,) {
+  display: flex;
+  flex-direction: $direction;
+  column-gap: $col;
+  row-gap: $row;
+
+}
+
 @mixin text($font-size: null, $font-weight: null, $line-height: null, $color: null) {
   font-size: $font-size;
   font-weight: $font-weight;

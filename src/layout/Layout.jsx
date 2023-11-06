@@ -12,7 +12,7 @@ const Layout = () => {
       }}
     >
       <Header />
-      <main style={{ flex: '1 1 0', marginTop: '100px' }}>
+      <main style={{ flex: '1 1 0', marginTop: '128px' }}>
         <Outlet />
       </main>
       <Footer />
