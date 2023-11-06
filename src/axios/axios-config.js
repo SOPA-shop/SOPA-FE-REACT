@@ -1,20 +1,28 @@
-import axios from 'axios';
+import axios from 'axios'
 
 // Tạo một phiên axios
 const HTTP = axios.create({
   baseURL: 'http://localhost:3000',
-});
+})
 
+HTTP.interceptors.request.use((config) => {
+  // Lấy token từ lưu trữ (localStorage, cookies, hoặc nơi khác)
+  const token = localStorage.getItem('token')
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`
+  }
+  return config
+})
 // Tạo một interceptor để xử lý mã lỗi HTTP
 HTTP.interceptors.response.use(
-  response => {
+  (response) => {
     // Xử lý phản hồi thành công
-    return response.data;
+    return response.data
   },
-  error => {
+  (error) => {
     // Xử lý lỗi
     if (error.response) {
-      const { status } = error.response;
+      const { status } = error.response
 
       if (status === 401) {
         // Xử lý mã lỗi 401 (Unauthorized)
@@ -31,8 +39,8 @@ HTTP.interceptors.response.use(
       }
     }
 
-    return Promise.reject(error);
-  }
-);
+    return Promise.reject(error)
+  },
+)
 
-export default HTTP;
+export default HTTP
