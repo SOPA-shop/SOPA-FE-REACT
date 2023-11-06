@@ -3,10 +3,19 @@
     [
       "module-resolver",
       {
-        "root": ["./src"],
+        "root": [
+          "src"
+        ],
         "alias": {
-          "@": "./src"
-        }
+          "@assets": "./assets",
+          "@components": "./components",
+          "@styles": "./styles"
+        },
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".json"
+        ]
       }
     ]
   ]

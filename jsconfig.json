@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@components/*": [
+        "components/*"
+      ],
+      "@assets/*": [
+        "src/assets/*"
+      ],
+      "~axios/*": [
+        "src/axios/*"
+      ],
+      "~layout/*": [
+        "src/layout/*"
+      ],
+      "~pages/*": [
+        "src/pages/*"
+      ],
+      "~redux/*": [
+        "src/redux/*"
+      ],
+      "~services/*": [
+        "src/services/*"
+      ],
+      "~/*": [
+        "src/*"
+      ],
+      "~assets/*": [
+        "src/assets/*"
+      ]
+    },
+    "include": [
+      "src"
+    ]
+  }
+}
