@@ -1,8 +1,8 @@
 import './style.scss'
-import logo from '/src/assets/image/logo.svg'
-import logoInstagram from '/src/assets/image/instagram.svg'
-import logoFacebook from '/src/assets/image/facebook.svg'
-import logoTwitter from '/src/assets/image/twitter.svg'
+import logo from '../../assets/image/Logo.svg'
+import logoInstagram from '../../assets/image/instagram.svg'
+import logoFacebook from '../../assets/image/facebook.svg'
+import logoTwitter from '../../assets/image/twitter.svg'
 import { Col, Grid, Row } from 'rsuite'
 
 export default function Footer() {
