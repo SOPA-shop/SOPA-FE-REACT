@@ -1,4 +1,5 @@
 @import '../../assets/scss/config_variables.scss';
+@import '../../assets/scss/mixin-variables.scss';
 @import 'rsuite/dist/rsuite.css';
 .footer {
   width: 100%;
@@ -7,60 +8,69 @@
   color: #fff;
   font-size: $font-size-16;
   &__container {
-    display: flex;
-    justify-content: space-around;
     margin: 0 auto;
-    width: 1170px;
-    .footer__logo {
+    max-width: 1170px;
+    padding: 0;
+    .footer__wraper {
       display: flex;
-      width: 370px !important;
-      flex-direction: column;
-      margin-right: 30px;
-      &__btn {
-        width: 320px;
-        padding: 12px 24px;
-        color: $grey-100;
-        background-color: transparent;
-        border: 1px solid $grey-100;
-        border-radius: 32px;
-        cursor: pointer;
-      }
-      &__wraper {
+      padding: 0;
+      .footer__logo {
         display: flex;
-        align-items: center;
-        padding: 16px 0;
-        margin-bottom: 32px;
-        &__img {
-          margin-right: 16px;
-          user-select: none;
+        width: 370px;
+        flex-direction: column;
+        margin-right: 30px;
+        &__btn {
+          width: 320px;
+          padding: 12px 24px;
+          color: $secondary-color-white;
+          background-color: transparent;
+          border: 1px solid $secondary-color-white;
+          border-radius: 32px;
+          font-size: $font-size-16;
+          cursor: pointer;
         }
-      }
-      &__title {
-        font-size: $font-size-16;
-        line-height: 22px;
-        font-weight: 400;
-        width: 320px;
-        margin-bottom: 20px;
+        &__wraper {
+          display: flex;
+          align-items: center;
+          padding: 16px 0;
+          margin-bottom: 32px;
+          &__img {
+            margin-right: 16px;
+            user-select: none;
+          }
+        }
+        &__title {
+          font-size: $font-size-16;
+          line-height: 22px;
+          width: 320px;
+          margin-bottom: 20px;
+        }
       }
     }
-    .footer__col {
-      width: 170px;
-      &__items {
-        &__title {
-          font-size: $font-size-20;
-          font-weight: 500;
-          margin-bottom: 24px;
-        }
-        &__list {
-          &__item {
-            margin-bottom: 20px;
-            &__link {
-              color: $grey-100;
-              font-weight: 400;
-              font-size: 16px;
-              line-height: 22px;
-              &:hover {
-                text-decoration: none;
+    .footer__col__wrap {
+      max-width: 770px;
+      @include flex-gap(row, 30px, 0);
+      .footer__col {
+        width: 170px;
+        padding: 0;
+        @include flex-gap(row, 0, 30px);
+        &__items {
+          &__title {
+            color: $secondary-color-white;
+            font-size: $font-size-20;
+            font-weight: $font-weight-500;
+            margin-bottom: 24px;
+          }
+          &__list {
+            @include flex-gap(column, 0, 20px);
+            &__item {
+              &__link {
+                color: $secondary-color-white;
+                font-size: 16px;
+                line-height: 22px;
+                &:hover {
+                  text-decoration: none;
+                }
               }
             }
           }
@@ -70,17 +80,18 @@
     .footer__contact {
       display: flex;
       align-items: center;
-      // align-items: center;
+      width: 170px;
       &__list {
+        @include flex-gap(column, 0, 22px);
         &__li {
           &__link {
+            @include flex-gap(row, 12px, 0);
             display: flex;
             align-items: center;
-            margin-bottom: 20px;
             color: #fff;
             cursor: pointer;
-            &__img {
-              margin-right: 12px;
+            &:hover {
+              text-decoration: none;
             }
           }
         }
