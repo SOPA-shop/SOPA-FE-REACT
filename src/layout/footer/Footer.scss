@@ -87,7 +87,7 @@
             @include flex-gap(row, 12px, null);
             display: flex;
             align-items: center;
-            color: #fff;
+            color: $secondary-color-white;
             cursor: pointer;
           }
         }
