@@ -52,36 +52,20 @@ export default function Footer() {
             })}
             <Col className="footer__contact">
               <ul className="footer__contact__list">
-                <li className="footer__contact__list__li">
-                  <Link className="footer__contact__list__li__link" to="#">
-                    <img
-                      className="footer__contact__list__li__link__img"
-                      src={logoTwitter}
-                      alt="twitter"
-                    />
-                    <span>Twitter</span>
-                  </Link>
-                </li>
-                <li className="footer__contact__list__li">
-                  <Link className="footer__contact__list__li__link" to="#">
-                    <img
-                      className="footer__contact__list__li__link__img"
-                      src={logoInstagram}
-                      alt="instagram"
-                    />
-                    <span>Instagram</span>
-                  </Link>
-                </li>
-                <li className="footer__contact__list__li">
-                  <Link className="footer__contact__list__li__link" to="#">
-                    <img
-                      className="footer__contact__list__li__link__img"
-                      src={logoFacebook}
-                      alt="facebook"
-                    />
-                    <span>Facebook</span>
-                  </Link>
-                </li>
+                {dataContactFooter.map((item, index) => {
+                  return (
+                    <li className="footer__contact__list__li" key={index}>
+                      <Link className="footer__contact__list__li__link" to="#">
+                        <img
+                          className="footer__contact__list__li__link__img"
+                          src={item.image}
+                          alt="twitter"
+                        />
+                        <span>{item.title}</span>
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </Col>
           </div>
@@ -125,4 +109,19 @@ const dataFooter = [
       'Sopa Ambassador'
     ]
   }
+]
+
+const dataContactFooter = [
+  {
+    image: logoTwitter,
+    title: 'Twitter',
+  },
+  {
+    image: logoInstagram,
+    title: 'Instagram',
+  },
+  {
+    image: logoFacebook,
+    title: 'Facebook',
+  },
 ]
