@@ -4,7 +4,7 @@
 .footer {
   width: 100%;
   padding: 80px 0 80px 0;
-  background-color: #02021d;
+  background-color: $primary-color-black;
   color: $secondary-color-white;
   font-size: $font-size-16;
   &__container {
@@ -49,12 +49,13 @@
     }
     .footer__col__wrap {
       max-width: 770px;
-      @include flex-gap(row, 30px, 0);
+      @include flex-gap(row, 30px, null);
       .footer__col {
         width: 170px;
         padding: 0;
-        @include flex-gap(row, 0, 30px);
+        @include flex-gap(row, null, 30px);
         &__items {
+          width: 100%;
           &__title {
             color: $secondary-color-white;
             font-size: $font-size-20;
@@ -62,15 +63,12 @@
             margin-bottom: 24px;
           }
           &__list {
-            @include flex-gap(column, 0, 20px);
+            @include flex-gap(column, null, 20px);
             &__item {
               &__link {
                 color: $secondary-color-white;
-                font-size: 16px;
+                font-size: $font-size-16;
                 line-height: 22px;
-                &:hover {
-                  text-decoration: none;
-                }
               }
             }
           }
@@ -81,18 +79,16 @@
       display: flex;
       align-items: center;
       width: 170px;
+      padding: 0;
       &__list {
-        @include flex-gap(column, 0, 22px);
+        @include flex-gap(column, null, 22px);
         &__li {
           &__link {
-            @include flex-gap(row, 12px, 0);
+            @include flex-gap(row, 12px, null);
             display: flex;
             align-items: center;
             color: #fff;
             cursor: pointer;
-            &:hover {
-              text-decoration: none;
-            }
           }
         }
       }
