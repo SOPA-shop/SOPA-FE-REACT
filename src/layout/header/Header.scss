@@ -39,11 +39,19 @@
         @include text($font-size-16, $font-weight-400, 22px, $primary-color-black);
         cursor: pointer;
 
+        &:last-child {
+          &:hover {
+            text-decoration: none;
+          }
+        }
+
         &__quiz {
           padding: 8px 12px;
           border-radius: 24px;
           border: 1px solid $yellowish-green;
           @include text($font-size-16, $font-weight-400, 22px, $yellowish-green);
+
+
         }
       }
     }
