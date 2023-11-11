@@ -1,5 +1,5 @@
 import AuthFormWithInputField from '../../component/AuthForm/AuthFormWithInputField.jsx';
-import validateEmailAndPassword from '../../containts/validation/validation-schema.js';
+import { validateEmailAndPassword } from '../../containts/validation/validation-schema.js';
 
 const Join = () => {
   const fields = {

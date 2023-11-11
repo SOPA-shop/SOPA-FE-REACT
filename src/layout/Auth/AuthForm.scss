@@ -2,10 +2,13 @@
 @import "src/assets/scss/mixin-variables.scss";
 
 .auth {
-  @include flex-gap(column, null, 60px);
+  display: flex;
+  flex-direction: column;
   margin: 80px auto;
   width: max-content;
   max-width: 470px;
+  min-height: max-content;
+  max-height: 666px;
 
   &__title {
     display: block;

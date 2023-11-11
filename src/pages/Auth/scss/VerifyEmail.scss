@@ -1,0 +1,45 @@
+@import "src/assets/scss/config_variables.scss";
+@import "src/assets/scss/mixin-variables.scss";
+
+.verify-email {
+  @include flex-gap(column, null, 32px);
+
+  &__content {
+    @include flex-gap(column, null, 12px);
+
+    &__title {
+      @include text($font-size-20, $font-weight-500, 24px, $primary-color-black);
+    }
+
+    &__sub-title {
+      @include text($font-size-18, $font-weight-400, 22px, $primary-color-black);
+
+      &__email {
+        color: $yellowish-green;
+      }
+    }
+  }
+
+  &__form {
+    @include flex-gap(column, null, 32px);
+
+    &__content {
+      @include flex-gap(column, null, 24px);
+      max-width: 213px;
+    }
+
+    &__navigator {
+      @include flex-gap(row, 12px);
+      @include text($font-size-16, $font-weight-400, 22px, $primary-color-black);
+
+      &__link {
+        color: $primary-color-black;
+        text-decoration: underline;
+
+        &:hover {
+          color: #545C7C;
+        }
+      }
+    }
+  }
+}
