@@ -46,7 +46,9 @@ const Join = () => {
             </Form>
             <div className="join__navigator">
               <span>Already have an account?</span>
-              <Link to="/login">Sign in</Link>
+              <Link to="/login" className="join__navigator__link">
+                Sign in
+              </Link>
             </div>
           </div>
         </AuthForm>

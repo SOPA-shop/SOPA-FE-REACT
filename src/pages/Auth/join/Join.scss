@@ -10,5 +10,16 @@
 
   .join__navigator {
     @include flex-gap(row, 12px);
+    @include text($font-size-16, $font-weight-400, 22px, $primary-color-black);
+
+    &__link {
+      color: $primary-color-black;
+      text-decoration: underline;
+      transition: all 0.3s ease;
+
+      &:hover {
+        color: #545C7C;
+      }
+    }
   }
 }

@@ -28,6 +28,7 @@ const BaseInputText = ({ ...props }) => {
       error={error.error && error.touched}
       sx={{
         '& .MuiOutlinedInput-root': {
+          color: error.value && !error.error && '#3184FF',
           '& fieldset': {
             borderWidth: '1px',
             borderColor: error.value && !error.error ? '#3184FF' : '#E3E5ED',

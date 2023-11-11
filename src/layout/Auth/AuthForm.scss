@@ -10,6 +10,7 @@
   &__title {
     display: block;
     width: 470px;
+    font-family: 'Noto Serif Lao', serif;
     @include text($font-size-48, $font-weight-700, 56px, $primary-color-black);
   }
 
