@@ -1,6 +1,6 @@
-import TextField from '@mui/material/TextField'
-import { styled } from '@mui/system'
-import { useField } from 'formik'
+import TextField from '@mui/material/TextField';
+import { styled } from '@mui/system';
+import { useField } from 'formik';
 
 const InputField = styled(TextField)({
   '& .MuiInputBase-root': {
@@ -15,10 +15,10 @@ const InputField = styled(TextField)({
     fontSize: '16px',
     fontFamily: 'Rubik',
   },
-})
+});
 
 const BaseInputText = ({ ...props }) => {
-  const [field, error] = useField(props)
+  const [field, error] = useField(props);
   return (
     <InputField
       {...field}
@@ -38,9 +38,10 @@ const BaseInputText = ({ ...props }) => {
         '& .MuiInputLabel-root': {
           color: error.value && !error.error && '#3184FF',
         },
+        height: '76px',
       }}
     />
-  )
-}
+  );
+};
 
-export default BaseInputText
+export default BaseInputText;

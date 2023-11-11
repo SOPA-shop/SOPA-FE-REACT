@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 import { emailRegex, passwordRegex } from '../regex_variables.js';
 
-const validateEmailAndPassword = Yup.object().shape({
+export const validateEmailAndPassword = Yup.object().shape({
   email: Yup.string()
     .email('Invalid email')
     .matches(emailRegex, 'email must only contain letters and numbers')
@@ -13,4 +13,8 @@ const validateEmailAndPassword = Yup.object().shape({
     .required('Password is required'),
 });
 
-export default validateEmailAndPassword;
+export const validateOTP = Yup.object().shape({
+  OTP: Yup.string()
+    .required('OTP is required')
+    .matches(/^[a-zA-Z]{6}$/, 'OTP must only contain letters'),
+});
