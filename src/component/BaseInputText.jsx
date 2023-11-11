@@ -19,8 +19,6 @@ const InputField = styled(TextField)({
 
 const BaseInputText = ({ ...props }) => {
   const [field, error] = useField(props)
-
-  console.log('meta.error', error)
   return (
     <InputField
       {...field}
