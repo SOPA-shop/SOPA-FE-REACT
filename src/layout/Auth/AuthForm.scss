@@ -1,5 +1,5 @@
-@import "src/assets/scss/config_variables.scss";
-@import "src/assets/scss/mixin-variables.scss";
+@import 'src/assets/scss/config_variables.scss';
+@import 'src/assets/scss/mixin-variables.scss';
 
 .auth {
   display: flex;
@@ -16,5 +16,4 @@
     font-family: 'Noto Serif Lao', serif;
     @include text($font-size-48, $font-weight-700, 56px, $primary-color-black);
   }
-
 }

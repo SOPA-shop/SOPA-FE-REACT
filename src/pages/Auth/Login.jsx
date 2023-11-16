@@ -1,13 +1,8 @@
 import AuthFormWithInputField from '../../component/AuthForm/AuthFormWithInputField.jsx';
 import { validateEmailAndPassword } from '../../containts/validation/validation-schema.js';
-import { registerUser } from '../../containts/APIs/api-service-auth.js';
 import { useNavigate } from 'react-router-dom';
-import {
-  setEmailToLocalStorage,
-  setUserIdToLocalStorage
-} from '../../containts/local-storage-varibles.js';
-
-const Join = () => {
+import { SignIn } from '../../containts/APIs/api-service-auth.js';
+const Login = () => {
   const navigate = useNavigate();
   const fields = {
     initialValues: {
@@ -29,11 +24,13 @@ const Join = () => {
     ],
   };
   const handleSubmit = async ({email,password}) => {
-    await registerUser(email,password).then(
-      (userId) => {
-        setEmailToLocalStorage(email);
-        setUserIdToLocalStorage(userId)
-        navigate('/verify-email');
+    await SignIn(email,password).then(
+      (res) => {
+        if(res.verified){
+          navigate('/');
+        }else{
+          navigate('/verify-email');
+        }
       }
     ).catch(
       (error) => {
@@ -41,16 +38,17 @@ const Join = () => {
       }
     )
   };
+
   return (
     <AuthFormWithInputField
-      buttonName="Create Account"
-      linkTo="/login"
+      buttonName="Login"
+      linkTo="/join"
       getValues={handleSubmit}
-      contentNavigator="Already have an account?"
-      contentLink="Sign in"
+      contentNavigator="New to Sopa?"
+      contentLink="Create an account"
       fields={fields}
-      title="Create an account"
+      title="Sign in"
     />
   );
 };
-export default Join;
+export default Login;

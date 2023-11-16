@@ -53,9 +53,15 @@ const AuthFormWithInputField = ({
                   {contentLink}
                 </Link>
               </div>
-              <Link to="/forgot-password" className="navigator-forgot">
-                Forgot password?
-              </Link>
+              {
+                buttonName ==='Change'?
+                  <Link to="/verify-email" className="navigator-forgot">
+                  Go back
+                  </Link>:
+                  <Link to="/forgot-password" className="navigator-forgot">
+                    Forgot password?
+                  </Link>
+              }
             </div>
           </div>
         </AuthForm>

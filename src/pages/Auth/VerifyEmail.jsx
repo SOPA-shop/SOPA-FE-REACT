@@ -1,21 +1,32 @@
 import {
+  ClearAvailableFromLocalStorage, getAvailableAccountFromLocalStorage,
   getEmailFromLocalStorage,
-  getUserIdFromLocalStorage,
 } from '../../containts/local-storage-varibles.js';
 import { Field, Form, Formik } from 'formik';
 import AuthForm from '../../layout/Auth/AuthForm.jsx';
 import BaseInputText from '../../component/BaseInputText.jsx';
 import ButtonWithText from '../../component/button/ButtonWithText.jsx';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { validateOTP } from '../../containts/validation/validation-schema.js';
 import './scss/VerifyEmail.scss';
-import { sendSubmitOTP } from '../../containts/APIs/api-service-auth.js';
+import {sendSubmitOTP } from '../../containts/APIs/api-service-auth.js';
 
 const VerifyEmail = () => {
-  const userId = getUserIdFromLocalStorage();
+  const navigate = useNavigate();
   const currentEmail = getEmailFromLocalStorage();
+  const available = getAvailableAccountFromLocalStorage();
   const handleVerifyEmail = async (values) => {
-    await sendSubmitOTP(userId, values.OTP);
+    await sendSubmitOTP( values.OTP).then(
+      () => {
+        if (available) {
+          ClearAvailableFromLocalStorage()
+          navigate('/new-password');
+        } else {
+          ClearAvailableFromLocalStorage()
+          navigate('/login');
+        }
+      }
+    )
   };
   return (
     <Formik
@@ -56,10 +67,10 @@ const VerifyEmail = () => {
                   Change your e-mail
                 </div>
                 <Link
-                  to="/edit-email"
+                  to= '/change-email'
                   className="verify-email__form__navigator__link"
                 >
-                  Change email
+                  Edit Email
                 </Link>
               </div>
             </Form>
