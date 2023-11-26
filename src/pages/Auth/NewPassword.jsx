@@ -1,11 +1,13 @@
 import AuthFormWithInputField from '../../component/AuthForm/AuthFormWithInputField.jsx';
-import {
-  validatePasswordAndConfirmPassword
-} from '../../containts/validation/validation-schema.js';
+import { validatePasswordAndConfirmPassword } from '../../containts/validation/validation-schema.js';
 import { updatePassword } from '../../containts/APIs/api-service-auth.js';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { LoadingContext } from '../../containts/context/LoadingProvider.jsx';
+
 const NewPassword = () => {
   const navigate = useNavigate();
+  const { hideLoading, showLoading } = useContext(LoadingContext);
   const fields = {
     initialValues: {
       password: '',
@@ -25,17 +27,18 @@ const NewPassword = () => {
       },
     ],
   };
-  const handleSubmit = async ({password}) => {
-    await updatePassword(password).then(
-      () => {
-        alert('thay doi thanh cong')
+  const handleSubmit = async ({ password }) => {
+    await showLoading();
+    await updatePassword(password)
+      .then(() => {
+        hideLoading();
+        alert('thay doi thanh cong');
         navigate('/login');
-      }
-    ).catch(
-      (error) => {
+      })
+      .catch((error) => {
+        hideLoading();
         console.error('Registration error:', error);
-      }
-    )
+      });
   };
 
   return (

@@ -4,11 +4,14 @@ import { registerUser } from '../../containts/APIs/api-service-auth.js';
 import { useNavigate } from 'react-router-dom';
 import {
   setEmailToLocalStorage,
-  setUserIdToLocalStorage
+  setUserIdToLocalStorage,
 } from '../../containts/local-storage-varibles.js';
+import { useContext } from 'react';
+import { LoadingContext } from '../../containts/context/LoadingProvider.jsx';
 
 const Join = () => {
   const navigate = useNavigate();
+  const { hideLoading, showLoading } = useContext(LoadingContext);
   const fields = {
     initialValues: {
       email: '',
@@ -28,18 +31,20 @@ const Join = () => {
       },
     ],
   };
-  const handleSubmit = async ({email,password}) => {
-    await registerUser(email,password).then(
-      (userId) => {
+
+  const handleSubmit = async ({ email, password }) => {
+    await showLoading();
+    await registerUser(email, password)
+      .then((userId) => {
         setEmailToLocalStorage(email);
-        setUserIdToLocalStorage(userId)
+        setUserIdToLocalStorage(userId);
+        hideLoading();
         navigate('/verify-email');
-      }
-    ).catch(
-      (error) => {
+      })
+      .catch((error) => {
+        hideLoading();
         console.error('Registration error:', error);
-      }
-    )
+      });
   };
   return (
     <AuthFormWithInputField

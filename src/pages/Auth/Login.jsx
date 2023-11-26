@@ -2,8 +2,18 @@ import AuthFormWithInputField from '../../component/AuthForm/AuthFormWithInputFi
 import { validateEmailAndPassword } from '../../containts/validation/validation-schema.js';
 import { useNavigate } from 'react-router-dom';
 import { SignIn } from '../../containts/APIs/api-service-auth.js';
+import { useContext } from 'react';
+import { LoadingContext } from '../../containts/context/LoadingProvider.jsx';
+import {
+  setEmailToLocalStorage,
+  setRoleToLocalStorage,
+  setTokenToLocalStorage,
+  setUserIdToLocalStorage,
+} from '../../containts/local-storage-varibles.js';
+
 const Login = () => {
   const navigate = useNavigate();
+  const { hideLoading, showLoading } = useContext(LoadingContext);
   const fields = {
     initialValues: {
       email: '',
@@ -23,20 +33,27 @@ const Login = () => {
       },
     ],
   };
-  const handleSubmit = async ({email,password}) => {
-    await SignIn(email,password).then(
-      (res) => {
-        if(res.verified){
+  const handleSubmit = async ({ email, password }) => {
+    await showLoading();
+    await SignIn(email, password)
+      .then((response) => {
+        const { accessToken, email, role, userId, verified } = response;
+        setEmailToLocalStorage(email);
+        setUserIdToLocalStorage(userId);
+        setTokenToLocalStorage(accessToken);
+        setRoleToLocalStorage(role);
+        hideLoading();
+        if (verified) {
+          hideLoading();
           navigate('/');
-        }else{
+        } else {
           navigate('/verify-email');
         }
-      }
-    ).catch(
-      (error) => {
+      })
+      .catch((error) => {
+        hideLoading();
         console.error('Registration error:', error);
-      }
-    )
+      });
   };
 
   return (

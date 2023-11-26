@@ -4,16 +4,19 @@ export const setEmailToLocalStorage = (email) => {
 };
 export const setPasswordToLocalStorage = (password) => {
   localStorage.setItem('password', password);
-}
+};
 export const setUserIdToLocalStorage = (userId) => {
   localStorage.setItem('userId', userId);
 };
 export const setTokenToLocalStorage = (token) => {
   localStorage.setItem('token', token);
 };
-export const setAvailableAccountToLocalStorage= (available) => {
+export const setAvailableAccountToLocalStorage = (available) => {
   localStorage.setItem('available', available);
-}
+};
+export const setRoleToLocalStorage = (role) => {
+  localStorage.setItem('role', role);
+};
 
 // get item from local storage
 
@@ -28,7 +31,10 @@ export const getTokenFromLocalStorage = () => {
 };
 export const getAvailableAccountFromLocalStorage = () => {
   return localStorage.getItem('available');
-}
+};
+export const getRoleFromLocalStorage = () => {
+  return localStorage.getItem('role');
+};
 
 // remove item from local storage
 
@@ -37,7 +43,7 @@ export const ClearEmailFromLocalStorage = () => {
 };
 export const ClearPasswordFromLocalStorage = () => {
   localStorage.removeItem('password');
-}
+};
 export const ClearUserIdFromLocalStorage = () => {
   localStorage.removeItem('userId');
 };
@@ -46,4 +52,8 @@ export const ClearTokenFromLocalStorage = () => {
 };
 export const ClearAvailableFromLocalStorage = () => {
   localStorage.removeItem('available');
-}
+};
+
+export const ClearRoleFromLocalStorage = () => {
+  localStorage.removeItem('role');
+};

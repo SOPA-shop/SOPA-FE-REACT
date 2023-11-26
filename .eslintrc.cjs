@@ -21,7 +21,6 @@ module.exports = {
         "indent": ["error", 2],
         // "semi": "none",
         "quotes": ["error", "single"],
-        "max-len": ["error", {"code": 100}],
         "no-unused-vars": "error",
         "consistent-return": "error",
         "comma-dangle": "off",
