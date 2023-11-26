@@ -7,11 +7,11 @@ import ForgotPassword from './pages/Auth/ForgotPassword.jsx';
 import ChangeEmail from './pages/Auth/ChangeEmail.jsx';
 import NewPassword from './pages/Auth/NewPassword.jsx';
 import Login from './pages/Auth/Login.jsx';
-import { LoadingProvider } from './containts/context/LoadingProvider.jsx';
+import { EffectProvider } from './containts/context/EffectProvider.jsx';
 
 function App() {
   return (
-    <LoadingProvider>
+    <EffectProvider>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/login" element={<Login />} />
@@ -23,7 +23,7 @@ function App() {
         </Route>
         <Route path="*" element={<ErrorPage />} />
       </Routes>
-    </LoadingProvider>
+    </EffectProvider>
   );
 }
 

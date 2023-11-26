@@ -1,13 +1,12 @@
 import AuthFormWithInputField from '../../component/AuthForm/AuthFormWithInputField.jsx';
 import { validatePasswordAndConfirmPassword } from '../../containts/validation/validation-schema.js';
 import { updatePassword } from '../../containts/APIs/api-service-auth.js';
-import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
-import { LoadingContext } from '../../containts/context/LoadingProvider.jsx';
+import { EffectContext } from '../../containts/context/EffectProvider.jsx';
 
 const NewPassword = () => {
-  const navigate = useNavigate();
-  const { hideLoading, showLoading } = useContext(LoadingContext);
+  const { hideLoading, showLoading, messageNotification } =
+    useContext(EffectContext);
   const fields = {
     initialValues: {
       password: '',
@@ -32,12 +31,20 @@ const NewPassword = () => {
     await updatePassword(password)
       .then(() => {
         hideLoading();
-        alert('thay doi thanh cong');
-        navigate('/login');
+        messageNotification(
+          'success',
+          'Change password successfully',
+          '/login',
+        );
       })
       .catch((error) => {
         hideLoading();
-        console.error('Registration error:', error);
+        if (error.response.status === 401) {
+          messageNotification('error', 'Invalid email or password');
+        }
+        if (error.response.status === 404) {
+          messageNotification('error', 'Email not found');
+        }
       });
   };
 

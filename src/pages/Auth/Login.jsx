@@ -3,7 +3,7 @@ import { validateEmailAndPassword } from '../../containts/validation/validation-
 import { useNavigate } from 'react-router-dom';
 import { SignIn } from '../../containts/APIs/api-service-auth.js';
 import { useContext } from 'react';
-import { LoadingContext } from '../../containts/context/LoadingProvider.jsx';
+import { EffectContext } from '../../containts/context/EffectProvider.jsx';
 import {
   setEmailToLocalStorage,
   setRoleToLocalStorage,
@@ -13,7 +13,8 @@ import {
 
 const Login = () => {
   const navigate = useNavigate();
-  const { hideLoading, showLoading } = useContext(LoadingContext);
+  const { hideLoading, showLoading, messageNotification } =
+    useContext(EffectContext);
   const fields = {
     initialValues: {
       email: '',
@@ -45,14 +46,16 @@ const Login = () => {
         hideLoading();
         if (verified) {
           hideLoading();
-          navigate('/');
+          messageNotification('success', 'Login successfully', '/');
         } else {
           navigate('/verify-email');
         }
       })
       .catch((error) => {
         hideLoading();
-        console.error('Registration error:', error);
+        if (error.response.status === 401) {
+          messageNotification('error', 'Invalid email or password');
+        }
       });
   };
 
