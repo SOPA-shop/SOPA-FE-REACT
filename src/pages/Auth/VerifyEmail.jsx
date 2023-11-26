@@ -1,5 +1,6 @@
 import {
-  ClearAvailableFromLocalStorage, getAvailableAccountFromLocalStorage,
+  ClearAvailableFromLocalStorage,
+  getAvailableAccountFromLocalStorage,
   getEmailFromLocalStorage,
 } from '../../containts/local-storage-varibles.js';
 import { Field, Form, Formik } from 'formik';
@@ -9,24 +10,27 @@ import ButtonWithText from '../../component/button/ButtonWithText.jsx';
 import { Link, useNavigate } from 'react-router-dom';
 import { validateOTP } from '../../containts/validation/validation-schema.js';
 import './scss/VerifyEmail.scss';
-import {sendSubmitOTP } from '../../containts/APIs/api-service-auth.js';
+import { sendSubmitOTP } from '../../containts/APIs/api-service-auth.js';
+import { useContext } from 'react';
+import { LoadingContext } from '../../containts/context/LoadingProvider.jsx';
 
 const VerifyEmail = () => {
   const navigate = useNavigate();
   const currentEmail = getEmailFromLocalStorage();
   const available = getAvailableAccountFromLocalStorage();
-  const handleVerifyEmail = async (values) => {
-    await sendSubmitOTP( values.OTP).then(
-      () => {
-        if (available) {
-          ClearAvailableFromLocalStorage()
-          navigate('/new-password');
-        } else {
-          ClearAvailableFromLocalStorage()
-          navigate('/login');
-        }
+  const { hideLoading, showLoading } = useContext(LoadingContext);
+  const handleVerifyEmail = async ({ OTP }) => {
+    await showLoading();
+    await sendSubmitOTP(OTP).then(() => {
+      hideLoading();
+      if (available) {
+        ClearAvailableFromLocalStorage();
+        navigate('/new-password');
+      } else {
+        ClearAvailableFromLocalStorage();
+        navigate('/login');
       }
-    )
+    });
   };
   return (
     <Formik
@@ -67,7 +71,7 @@ const VerifyEmail = () => {
                   Change your e-mail
                 </div>
                 <Link
-                  to= '/change-email'
+                  to="/change-email"
                   className="verify-email__form__navigator__link"
                 >
                   Edit Email

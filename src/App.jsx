@@ -7,20 +7,23 @@ import ForgotPassword from './pages/Auth/ForgotPassword.jsx';
 import ChangeEmail from './pages/Auth/ChangeEmail.jsx';
 import NewPassword from './pages/Auth/NewPassword.jsx';
 import Login from './pages/Auth/Login.jsx';
+import { LoadingProvider } from './containts/context/LoadingProvider.jsx';
 
-function App () {
+function App() {
   return (
-    <Routes>
-      <Route path='/' element={ <Layout/> }>
-        <Route path='/login' element={ <Login/> }/>
-        <Route path='/join' element={ <Join/> }/>
-        <Route path='/forgot-password' element={<ForgotPassword />}/>
-        <Route path='new-password' element={<NewPassword />} />
-        <Route path='/verify-email' element={ <VerifyEmail/> }/>
-        <Route path='/change-email' element={ <ChangeEmail/> }/>
-      </Route>
-      <Route path='*' element={ <ErrorPage/> }/>
-    </Routes>
+    <LoadingProvider>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/join" element={<Join />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="new-password" element={<NewPassword />} />
+          <Route path="/verify-email" element={<VerifyEmail />} />
+          <Route path="/change-email" element={<ChangeEmail />} />
+        </Route>
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
+    </LoadingProvider>
   );
 }
 

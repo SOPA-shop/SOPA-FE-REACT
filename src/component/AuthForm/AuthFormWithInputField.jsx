@@ -18,6 +18,7 @@ const AuthFormWithInputField = ({
   const handleSubmit = (values) => {
     getValues(values);
   };
+
   return (
     <Formik
       initialValues={fields.initialValues}
@@ -53,15 +54,15 @@ const AuthFormWithInputField = ({
                   {contentLink}
                 </Link>
               </div>
-              {
-                buttonName ==='Change'?
-                  <Link to="/verify-email" className="navigator-forgot">
+              {buttonName === 'Change' ? (
+                <Link to="/verify-email" className="navigator-forgot">
                   Go back
-                  </Link>:
-                  <Link to="/forgot-password" className="navigator-forgot">
-                    Forgot password?
-                  </Link>
-              }
+                </Link>
+              ) : (
+                <Link to="/forgot-password" className="navigator-forgot">
+                  Forgot password?
+                </Link>
+              )}
             </div>
           </div>
         </AuthForm>
