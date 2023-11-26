@@ -1,17 +1,16 @@
 import AuthFormWithInputField from '../../component/AuthForm/AuthFormWithInputField.jsx';
 import { validateEmailAndPassword } from '../../containts/validation/validation-schema.js';
 import { registerUser } from '../../containts/APIs/api-service-auth.js';
-import { useNavigate } from 'react-router-dom';
 import {
   setEmailToLocalStorage,
   setUserIdToLocalStorage,
 } from '../../containts/local-storage-varibles.js';
 import { useContext } from 'react';
-import { LoadingContext } from '../../containts/context/LoadingProvider.jsx';
+import { EffectContext } from '../../containts/context/EffectProvider.jsx';
 
 const Join = () => {
-  const navigate = useNavigate();
-  const { hideLoading, showLoading } = useContext(LoadingContext);
+  const { hideLoading, showLoading, messageNotification } =
+    useContext(EffectContext);
   const fields = {
     initialValues: {
       email: '',
@@ -39,11 +38,20 @@ const Join = () => {
         setEmailToLocalStorage(email);
         setUserIdToLocalStorage(userId);
         hideLoading();
-        navigate('/verify-email');
+        messageNotification(
+          'success',
+          'Register successfully',
+          '/verify-email',
+        );
       })
       .catch((error) => {
         hideLoading();
-        console.error('Registration error:', error);
+        if (error.response.status === 409) {
+          messageNotification('error', 'Email already exists');
+        }
+        if (error.response.status === 400) {
+          messageNotification('error', 'Invalid email or password');
+        }
       });
   };
   return (

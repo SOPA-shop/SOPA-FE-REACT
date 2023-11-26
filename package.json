@@ -16,6 +16,7 @@
     "@mui/system": "^5.14.17",
     "@reduxjs/toolkit": "^1.9.7",
     "@vitejs/plugin-react": "^4.1.1",
+    "antd": "^5.11.4",
     "axios": "^1.6.0",
     "babel-plugin-module-resolver": "^5.0.0",
     "formik": "^2.4.5",

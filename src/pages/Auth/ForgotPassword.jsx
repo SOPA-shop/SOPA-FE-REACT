@@ -1,7 +1,6 @@
 import AuthFormWithInputField from '../../component/AuthForm/AuthFormWithInputField.jsx';
 import { validateEmail } from '../../containts/validation/validation-schema.js';
 import { resetPassword } from '../../containts/APIs/api-service-auth.js';
-import { useNavigate } from 'react-router-dom';
 import {
   ClearEmailFromLocalStorage,
   setAvailableAccountToLocalStorage,
@@ -9,11 +8,11 @@ import {
   setUserIdToLocalStorage,
 } from '../../containts/local-storage-varibles.js';
 import { useContext } from 'react';
-import { LoadingContext } from '../../containts/context/LoadingProvider.jsx';
+import { EffectContext } from '../../containts/context/EffectProvider.jsx';
 
 const ChangeEmail = () => {
-  const navigate = useNavigate();
-  const { hideLoading, showLoading } = useContext(LoadingContext);
+  const { hideLoading, showLoading, messageNotification } =
+    useContext(EffectContext);
   const fields = {
     initialValues: {
       email: '',
@@ -32,20 +31,24 @@ const ChangeEmail = () => {
     await showLoading();
     await resetPassword(values.email)
       .then(({ userId, available }) => {
+        hideLoading();
         if (available) {
           setUserIdToLocalStorage(userId);
           ClearEmailFromLocalStorage(values?.email);
           setEmailToLocalStorage(values.email);
           setAvailableAccountToLocalStorage(available);
-          navigate('/verify-email');
-        } else {
-          alert('loi');
+          messageNotification(
+            'success',
+            'Email verified successfully, please send OTP',
+            '/verify-email',
+          );
         }
-        hideLoading();
       })
       .catch((error) => {
         hideLoading();
-        console.error('Registration error:', error);
+        if (error.response.status === 404) {
+          messageNotification('error', 'Email not found');
+        }
       });
   };
   return (

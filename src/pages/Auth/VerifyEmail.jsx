@@ -7,30 +7,40 @@ import { Field, Form, Formik } from 'formik';
 import AuthForm from '../../layout/Auth/AuthForm.jsx';
 import BaseInputText from '../../component/BaseInputText.jsx';
 import ButtonWithText from '../../component/button/ButtonWithText.jsx';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { validateOTP } from '../../containts/validation/validation-schema.js';
 import './scss/VerifyEmail.scss';
 import { sendSubmitOTP } from '../../containts/APIs/api-service-auth.js';
 import { useContext } from 'react';
-import { LoadingContext } from '../../containts/context/LoadingProvider.jsx';
+import { EffectContext } from '../../containts/context/EffectProvider.jsx';
 
 const VerifyEmail = () => {
-  const navigate = useNavigate();
   const currentEmail = getEmailFromLocalStorage();
   const available = getAvailableAccountFromLocalStorage();
-  const { hideLoading, showLoading } = useContext(LoadingContext);
+  const { hideLoading, showLoading, messageNotification } =
+    useContext(EffectContext);
   const handleVerifyEmail = async ({ OTP }) => {
     await showLoading();
-    await sendSubmitOTP(OTP).then(() => {
-      hideLoading();
-      if (available) {
-        ClearAvailableFromLocalStorage();
-        navigate('/new-password');
-      } else {
-        ClearAvailableFromLocalStorage();
-        navigate('/login');
-      }
-    });
+    await sendSubmitOTP(OTP)
+      .then(() => {
+        hideLoading();
+        if (available) {
+          ClearAvailableFromLocalStorage();
+          messageNotification(
+            'success',
+            'Verify successfully',
+            '/new-password',
+          );
+        } else {
+          messageNotification('success', 'Verify successfully', '/login');
+          ClearAvailableFromLocalStorage();
+        }
+      })
+      .catch((error) => {
+        if (error.response.status === 400) {
+          messageNotification('error', 'Invalid OTP');
+        }
+      });
   };
   return (
     <Formik
