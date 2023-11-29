@@ -40,6 +40,7 @@ const VerifyEmail = () => {
         if (error.response.status === 400) {
           messageNotification('error', 'Invalid OTP');
         }
+        hideLoading();
       });
   };
   return (
