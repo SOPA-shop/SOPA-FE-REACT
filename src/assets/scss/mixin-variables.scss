@@ -1,0 +1,24 @@
+@mixin flex($direction: row,$row : null, $col :null, $justify-content: null, $align-items: null, $wrap: nowrap) {
+  display: flex;
+  flex-direction: $direction;
+  flex-wrap: $wrap;
+  column-gap: $col;
+  row-gap: $row;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+@mixin flex-gap($direction: row, $col :null,$row :null,) {
+  display: flex;
+  flex-direction: $direction;
+  column-gap: $col;
+  row-gap: $row;
+
+}
+
+@mixin text($font-size: null, $font-weight: null, $line-height: null, $color: null) {
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  color: $color;
+}

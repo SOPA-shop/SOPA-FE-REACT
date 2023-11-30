@@ -1,0 +1,67 @@
+@import "src/assets/scss/config_variables.scss";
+@import "src/assets/scss/mixin-variables.scss";
+
+.header {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  z-index: 10;
+
+  .hero-banner {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    @include text($font-size-16, $font-weight-400, 22px, $secondary-color-white);
+    background: $primary-color-black;
+  }
+
+  .nav-header {
+    margin: 0 auto;
+    padding: 20px 0;
+    @include flex(row, null, null, space-between, center);
+    max-width: 1172px;
+    width: 100%;
+
+    .logo-brand {
+      width: 144px;
+      height: 46px;
+      padding: 12px 0;
+      background: url("/src/assets/image/logo/logo.svg") no-repeat;
+      background-size: cover;
+    }
+
+    .navigation__menu {
+      @include flex(row, null, 24px, space-between, center);
+
+      &__item {
+        @include text($font-size-16, $font-weight-400, 22px, $primary-color-black);
+        cursor: pointer;
+
+        &:last-child {
+          &:hover {
+            text-decoration: none;
+          }
+        }
+
+        &__quiz {
+          padding: 8px 12px;
+          border-radius: 24px;
+          border: 1px solid $yellowish-green;
+          @include text($font-size-16, $font-weight-400, 22px, $yellowish-green);
+
+
+        }
+      }
+    }
+
+    .navigation__user {
+      @include flex(row, null, 24px, space-between, center);
+
+      &__text {
+        @include text($font-size-16, $font-weight-400, 22px, $primary-color-black);
+      }
+    }
+  }
+}
