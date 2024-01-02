@@ -52,7 +52,6 @@ const Login = () => {
         }
       })
       .catch((error) => {
-        hideLoading();
         if (error.response.status === 401) {
           messageNotification('error', 'Invalid email or password');
         }
